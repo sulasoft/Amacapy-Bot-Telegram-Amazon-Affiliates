@@ -8843,7 +8843,7 @@ class MainWindow(QMainWindow):
 				self.searchProgress.setValue(ctn)
 
 		if ctn == 5:
-			self.textProgress.setText("Configuring Google Chrome...")
+			self.textProgress.setText("Configuring...")
 
 		if ctn == 14:
 			QMessageBox.information(self, 'Error', 'An unexpected error has occurred, please try again.')
