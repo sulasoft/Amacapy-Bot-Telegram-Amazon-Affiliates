@@ -1,0 +1,5 @@
+beautifulsoup4==4.11.1
+PyQt5==5.15.7
+pyshorteners==1.0.1
+requests==2.26.0
+requests_cache==0.9.5
