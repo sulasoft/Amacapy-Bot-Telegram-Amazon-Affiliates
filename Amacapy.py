@@ -975,6 +975,7 @@ class MainWindow(QMainWindow):
 			
 			g.close()
 
+			self.textAddedProducts.setText("Products added correctly.")
 			self.textAddedProducts.show()
 			# self.addedProducts.show()
 			self.showProductsButton.show()
@@ -983,6 +984,7 @@ class MainWindow(QMainWindow):
 		else: 
 			
 			if len(readPublish) >= 36:
+				self.textFullCapacity.setText("The list of products to be published is full.")
 				self.textFullCapacity.show()
 				self.textAddedProducts.hide()
 				self.showProductsButton.show()
@@ -990,12 +992,11 @@ class MainWindow(QMainWindow):
 
 			else:
 
-				quantityProducts = int((36 - len(readPublish))/3)
-				quantityProductsOperation = int((len(_line))/3) - readPublish
-				if quantityProductsOperation > 0:
+				quantityProducts = 12 - int(len(readPublish)/3)
+				if quantityProducts < int(len(_line)/3):
 					if quantityProducts == 1:
 						
-						self.textFullCapacity.setText("There is only room to add " + str(cantidadproducts) + " products.")
+						self.textFullCapacity.setText("There is only room to add " + str(quantityProducts) + " product.")
 						self.textFullCapacity.show()
 					else:
 						
@@ -1019,6 +1020,7 @@ class MainWindow(QMainWindow):
 					g.close()
 
 					self.textFullCapacity.hide()
+					self.textAddedProducts.setText("Products added correctly.")
 					self.textAddedProducts.show()
 					self.showProductsButton.show()
 					self.addProductsButton.hide()
@@ -1060,8 +1062,8 @@ class MainWindow(QMainWindow):
 			self.titlePublish2.setText(_line[3])
 			self.pricePublish2.setText(_line[4])
 
-			self.publish1.hide()
-			self.publish2.hide()
+			self.publish1.show()
+			self.publish2.show()
 
 		if len(_line) == 9:
 			self.titlePublish1.setText(_line[0])
@@ -1071,9 +1073,9 @@ class MainWindow(QMainWindow):
 			self.titlePublish3.setText(_line[6])
 			self.pricePublish3.setText(_line[7])
 
-			self.publish1.hide()
-			self.publish2.hide()
-			self.publish3.hide()
+			self.publish1.show()
+			self.publish2.show()
+			self.publish3.show()
 		
 		if len(_line) == 12:
 			self.titlePublish1.setText(_line[0])
@@ -1085,10 +1087,10 @@ class MainWindow(QMainWindow):
 			self.titlePublish4.setText(_line[9])
 			self.pricePublish4.setText(_line[10])
 
-			self.publish1.hide()
-			self.publish2.hide()
-			self.publish3.hide()
-			self.publish4.hide()
+			self.publish1.show()
+			self.publish2.show()
+			self.publish3.show()
+			self.publish4.show()
 
 		if len(_line) == 15:
 			self.titlePublish1.setText(_line[0])
@@ -1102,11 +1104,11 @@ class MainWindow(QMainWindow):
 			self.titlePublish5.setText(_line[12])
 			self.pricePublish5.setText(_line[13])
 
-			self.publish1.hide()
-			self.publish2.hide()
-			self.publish3.hide()
-			self.publish4.hide()
-			self.publish5.hide()
+			self.publish1.show()
+			self.publish2.show()
+			self.publish3.show()
+			self.publish4.show()
+			self.publish5.show()
 
 		if len(_line) == 18:
 			self.titlePublish1.setText(_line[0])
@@ -1122,12 +1124,12 @@ class MainWindow(QMainWindow):
 			self.titlePublish6.setText(_line[15])
 			self.pricePublish6.setText(_line[16])
 
-			self.publish1.hide()
-			self.publish2.hide()
-			self.publish3.hide()
-			self.publish4.hide()
-			self.publish5.hide()
-			self.publish6.hide()
+			self.publish1.show()
+			self.publish2.show()
+			self.publish3.show()
+			self.publish4.show()
+			self.publish5.show()
+			self.publish6.show()
 
 
 		if len(_line) == 21:
@@ -1146,13 +1148,13 @@ class MainWindow(QMainWindow):
 			self.titlePublish7.setText(_line[18])
 			self.pricePublish7.setText(_line[19])
 
-			self.publish1.hide()
-			self.publish2.hide()
-			self.publish3.hide()
-			self.publish4.hide()
-			self.publish5.hide()
-			self.publish6.hide()
-			self.publish7.hide()
+			self.publish1.show()
+			self.publish2.show()
+			self.publish3.show()
+			self.publish4.show()
+			self.publish5.show()
+			self.publish6.show()
+			self.publish7.show()
 
 		if len(_line) == 24:
 			self.titlePublish1.setText(_line[0])
@@ -1172,14 +1174,14 @@ class MainWindow(QMainWindow):
 			self.titlePublish8.setText(_line[21])
 			self.pricePublish8.setText(_line[22])
 
-			self.publish1.hide()
-			self.publish2.hide()
-			self.publish3.hide()
-			self.publish4.hide()
-			self.publish5.hide()
-			self.publish6.hide()
-			self.publish7.hide()
-			self.publish8.hide()
+			self.publish1.show()
+			self.publish2.show()
+			self.publish3.show()
+			self.publish4.show()
+			self.publish5.show()
+			self.publish6.show()
+			self.publish7.show()
+			self.publish8.show()
 
 		if len(_line) == 27:
 			self.titlePublish1.setText(_line[0])
@@ -1201,15 +1203,15 @@ class MainWindow(QMainWindow):
 			self.titlePublish9.setText(_line[24])
 			self.pricePublish9.setText(_line[25])
 
-			self.publish1.hide()
-			self.publish2.hide()
-			self.publish3.hide()
-			self.publish4.hide()
-			self.publish5.hide()
-			self.publish6.hide()
-			self.publish7.hide()
-			self.publish8.hide()
-			self.publish9.hide()
+			self.publish1.show()
+			self.publish2.show()
+			self.publish3.show()
+			self.publish4.show()
+			self.publish5.show()
+			self.publish6.show()
+			self.publish7.show()
+			self.publish8.show()
+			self.publish9.show()
 
 
 		if len(_line) == 30:
@@ -1234,16 +1236,16 @@ class MainWindow(QMainWindow):
 			self.titlePublish10.setText(_line[27])
 			self.pricePublish10.setText(_line[28])
 
-			self.publish1.hide()
-			self.publish2.hide()
-			self.publish3.hide()
-			self.publish4.hide()
-			self.publish5.hide()
-			self.publish6.hide()
-			self.publish7.hide()
-			self.publish8.hide()
-			self.publish9.hide()
-			self.publish10.hide()
+			self.publish1.show()
+			self.publish2.show()
+			self.publish3.show()
+			self.publish4.show()
+			self.publish5.show()
+			self.publish6.show()
+			self.publish7.show()
+			self.publish8.show()
+			self.publish9.show()
+			self.publish10.show()
 
 		
 		if len(_line) == 33:
@@ -1270,17 +1272,17 @@ class MainWindow(QMainWindow):
 			self.titlePublish11.setText(_line[30])
 			self.pricePublish11.setText(_line[31])
 
-			self.publish1.hide()
-			self.publish2.hide()
-			self.publish3.hide()
-			self.publish4.hide()
-			self.publish5.hide()
-			self.publish6.hide()
-			self.publish7.hide()
-			self.publish8.hide()
-			self.publish9.hide()
-			self.publish10.hide()
-			self.publish11.hide()
+			self.publish1.show()
+			self.publish2.show()
+			self.publish3.show()
+			self.publish4.show()
+			self.publish5.show()
+			self.publish6.show()
+			self.publish7.show()
+			self.publish8.show()
+			self.publish9.show()
+			self.publish10.show()
+			self.publish11.show()
 	
 
 		if len(_line) == 36:
@@ -1309,18 +1311,18 @@ class MainWindow(QMainWindow):
 			self.titlePublish12.setText(_line[33])
 			self.pricePublish12.setText(_line[34])
 
-			self.publish1.hide()
-			self.publish2.hide()
-			self.publish3.hide()
-			self.publish4.hide()
-			self.publish5.hide()
-			self.publish6.hide()
-			self.publish7.hide()
-			self.publish8.hide()
-			self.publish9.hide()
-			self.publish10.hide()
-			self.publish11.hide()
-			self.publish12.hide()
+			self.publish1.show()
+			self.publish2.show()
+			self.publish3.show()
+			self.publish4.show()
+			self.publish5.show()
+			self.publish6.show()
+			self.publish7.show()
+			self.publish8.show()
+			self.publish9.show()
+			self.publish10.show()
+			self.publish11.show()
+			self.publish12.show()
 
 
 		self.closeProductsToPublishButton.show()
@@ -1336,6 +1338,7 @@ class MainWindow(QMainWindow):
 		self.settingsFrame.hide()
 		self.closeSettingsButton.hide()
 		self.openSettingsButton.show()
+
 
 	# Remove products displayed in Search Result Screen
 
@@ -6204,25 +6207,25 @@ class MainWindow(QMainWindow):
 				f.writelines(str(t) + "\n")
 			f.close()
 
-			self.titulo1Publicar.setText(_line[0])
+			self.titlePublish1.setText(_line[0])
 			self.pricePublish1.setText(_line[1])
-			self.titulo1Publicar.setText(_line[3])
+			self.titlePublish2.setText(_line[3])
 			self.pricePublish2.setText(_line[4])
-			self.titulo1Publicar.setText(_line[6])
+			self.titlePublish3.setText(_line[6])
 			self.pricePublish3.setText(_line[7])
-			self.titulo1Publicar.setText(_line[9])
+			self.titlePublish4.setText(_line[9])
 			self.pricePublish4.setText(_line[10])
-			self.titulo1Publicar.setText(_line[12])
+			self.titlePublish5.setText(_line[12])
 			self.pricePublish5.setText(_line[13])
-			self.titulo1Publicar.setText(_line[15])
+			self.titlePublish6.setText(_line[15])
 			self.pricePublish6.setText(_line[16])
-			self.titulo1Publicar.setText(_line[18])
+			self.titlePublish7.setText(_line[18])
 			self.pricePublish7.setText(_line[19])
-			self.titulo1Publicar.setText(_line[21])
+			self.titlePublish8.setText(_line[21])
 			self.pricePublish8.setText(_line[22])
-			self.titulo1Publicar.setText(_line[24])
+			self.titlePublish9.setText(_line[24])
 			self.pricePublish9.setText(_line[25])
-			self.titulo1Publicar0.setText(_line[27])
+			self.titlePublish10.setText(_line[27])
 			self.pricePublish10.setText(_line[28])
 
 			self.publish11.hide()
@@ -8730,18 +8733,7 @@ class MainWindow(QMainWindow):
 		self.timePublish.hide()
 		self.textTelegramMinutes.hide()
 		self.textPublishEvery.hide()
-		self.deleteProduct1Button.hide()
-		self.deleteProduct2Button.hide()
-		self.deleteProduct3Button.hide()
-		self.deleteProduct4Button.hide()
-		self.deleteProduct5Button.hide()
-		self.deleteProduct6Button.hide()
-		self.deleteProduct7Button.hide()
-		self.deleteProduct8Button.hide()
-		self.deleteProduct9Button.hide()
-		self.deleteProduct10Button.hide()
-		self.deleteProduct11Button.hide()
-		self.deleteProduct12Button.hide()
+		
 
 		if self.timePublish.text() == "":
 			self.timePublish.setText("0")
@@ -9195,7 +9187,6 @@ class amazonus(QtCore.QThread):
 			except:
 				self.any_signal.emit(14)
 				
-
 		else:
 
 			while ctn == 1:
@@ -9224,7 +9215,7 @@ class amazonus(QtCore.QThread):
 					ctn = 15
 					self.any_signal.emit(ctn)
 
-					url = 'https://www.amazon.us/s?k=' + self.keyword
+					url = 'https://www.amazon.com/s?k=' + self.keyword
 
 					req = requests.get(url, headers=headers, timeout=10)
 
@@ -9270,7 +9261,7 @@ class amazonus(QtCore.QThread):
 								product_price = product_price.replace('.' , '')
 								product_price = product_price.replace(',' , '.')
 								product_price = float(product_price)
-								product_link   = 'https://amazon.us'+product.find('a', class_='a-link-normal s-no-outline').get('href')+'&tag='+ idclient_line
+								product_link   = 'https://amazon.com'+product.find('a', class_='a-link-normal s-no-outline').get('href')+'&tag='+ idclient_line
 							
 
 		
@@ -9297,7 +9288,6 @@ class amazonus(QtCore.QThread):
 						else:
 							break
 						px = px + 1
-
 
 					f = open ('links.txt','w+')
 					for t in total_item:
