@@ -1490,7 +1490,7 @@ if __name__ == '__main__':
 			# Settings form
 			form_amazon_id               = TextField(label="Amazon ID", text_align="center", on_blur=change_amazon_id, width=400, height = 45, text_size=13)
 			form_telegram_token          = TextField(label="Telegram Token", text_align="center", on_blur=change_telegram_token, width=400, height = 45, text_size=13)
-			form_chat_id                 = TextField(label="Chat ID Example: @yourchatid", text_align="center", on_blur=change_chat_id, width=400, height = 45, text_size=13)
+			form_chat_id                 = TextField(label="Chat ID Example: yourchatid", text_align="center", on_blur=change_chat_id, width=400, height = 45, text_size=13)
 
 			# For modify message displayed in Telegram
 			switch_tinyurl_short_url	 = ft.Switch(label= 'Tinyurl', on_change=select_short_url)

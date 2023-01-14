@@ -119,14 +119,14 @@ while status_publish:
 					if 'yes' in telegram_publish[i]:
 						try:
 							requests.post('https://api.telegram.org/bot' + telegram_token[0] + "/sendMessage",
-								data = {'chat_id' : chat_id[0], 
+								data = {'chat_id' : f'@{chat_id[0]}', 
 										'text': 
 										before_title_message[0] + ' ' + title_publish[i] + '\n \n' + sale_price_message[0] + ' ' + str(price_publish[i]) + ' ' + currency_message[0] + '\n' + original_price_message[0]  + ' ' + str(round(price_publish[i] + (price_publish[i]*30/100 ), 2)) + ' ' + currency_message[0] + '\n' + url_message[0] + ' ' + new_url_publish
 										})
 						except:
 							sleep(10)
 							requests.post('https://api.telegram.org/bot' + telegram_token[0] + "/sendMessage",
-								data = {'chat_id' : chat_id[0], 
+								data = {'chat_id' : f'@{chat_id[0]}', 
 										'text': 
 										before_title_message[0] + ' ' + title_publish[i] + '\n \n' + sale_price_message[0] + ' ' + str(price_publish[i]) + ' ' + currency_message[0] + '\n' + original_price_message[0]  + ' ' + str(round(price_publish[i] + (price_publish[i]*30/100 ), 2)) + ' ' + currency_message[0] + '\n' + url_message[0] + ' ' + new_url_publish
 										})
