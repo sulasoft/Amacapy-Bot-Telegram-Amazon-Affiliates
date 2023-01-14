@@ -194,7 +194,8 @@ while status_search:
 								new_currency_result.append('USD')
 							else:
 								new_currency_result.append('EUR')
-					except:
+					except Exception as e:
+						print(str(e))
 						product_price = '0'
 						pass
 					# These methods are used to clean the data obtained.
@@ -426,7 +427,8 @@ while status_search:
 											new_currency_result.append('USD')
 										else:
 											new_currency_result.append('EUR')
-								except:
+								except Exception as e:
+									print(str(e))
 									product_price = '0'
 
 								print('Product Price: ' + str(product_price))
@@ -477,7 +479,8 @@ while status_search:
 									product_price = new_soup.find('span', class_="a-size-base a-color-price").text.strip()
 
 
-							except:
+							except Exception as e:
+								print(str(e))
 								product_price = "0"
 						
 							# The data found are added to the lists.
@@ -495,7 +498,8 @@ while status_search:
 							product_price = product_price.replace('.' , '')
 							product_price = product_price.replace(',' , '.')
 							product_price = float(product_price)
-						except:
+						except Exception as e:
+							print(str(e))
 							product_price = 0
 							pass
 							
