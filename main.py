@@ -1,5 +1,5 @@
 import flet as ft
-from flet import Page, Text, Row, TextField, ElevatedButton, Checkbox, Column, Container, IconButton
+from flet import Page, Text, Row, TextField, ElevatedButton, Checkbox, Column, Container, IconButton, Theme
 import time
 from time import sleep
 import requests
@@ -44,6 +44,9 @@ if __name__ == '__main__':
 		page.window_width = 720
 		page.window_height = 680
 		page.window_resizable = True
+		page.theme_mode = ft.ThemeMode.DARK
+		
+		
 
 
 		title_amacapy = Text(
@@ -110,11 +113,11 @@ if __name__ == '__main__':
 					ft.Container(height = 50, content= title_head_list_publish, alignment=ft.alignment.center),
 					ft.Divider(height=1, color="black"),
 					ft.Row(spacing=1, controls=[
-							Text('N°', width=55, text_align="center"),
-							Text('View', width=60, text_align="center"), 
-							Text('Product Title', width=290, text_align="center"),
-							Text(f'Price {currency}', width=80, text_align="center"),
-							Text('Del',width=80, text_align="center"), 
+							Text('N°', color="white", width=55, text_align="center"),
+							Text('View', color="white", width=60, text_align="center"), 
+							Text('Product Title', color="white", width=290, text_align="center"),
+							Text(f'Price {currency}', color="white", width=80, text_align="center"),
+							Text('Del',width=80, text_align="center", color="white"), 
 							],
 							alignment="center", vertical_alignment = "center"),
 					ft.Divider(height=1, color="black"),
@@ -125,9 +128,9 @@ if __name__ == '__main__':
 							alignment="end", vertical_alignment = "start")
 					),
 					ft.Row(controls=[
-							Text('Publish every', width=90, text_align="start"),
+							Text('Publish every', width=90, text_align="start",color="white"),
 							minutes_publish,
-							Text('on', width=20, text_align="start"),
+							Text('on', width=20, text_align="start", color="white"),
 							ft.ElevatedButton('Telegram' ,icon="telegram_rounded", on_click=publish_on_telegram),
 							],
 							alignment="center", vertical_alignment = "center"),					
@@ -173,9 +176,9 @@ if __name__ == '__main__':
 											Text(f"{i+1}. "),
 											ft.IconButton(on_click=view_url_history, data = i, icon="remove_red_eye_rounded", icon_size=20),
 											ft.TextField(value=title_history[i], read_only = True, text_align="start", keyboard_type = "text", width=250, height = 50, text_size=12, content_padding = 10),
-											ft.Text(value=price_history[i], width=80, text_align="center"),
-											ft.Text(value=platform_history[i]),
-											ft.Text(value=new_date)
+											ft.Text(color="white", value=price_history[i], width=80, text_align="center"),
+											ft.Text(color="white", value=platform_history[i]),
+											ft.Text(color="white", value=new_date)
 											], alignment="center", vertical_alignment = "center")
 										
 									) 
@@ -184,7 +187,7 @@ if __name__ == '__main__':
 					currency = ''
 					all_results.controls.append(
 						ft.Row(spacing=40, run_spacing=10, controls=[
-											Text("You have not yet added articles for publication")
+											Text("You have not yet added articles for publication", color="white")
 											], alignment="center", vertical_alignment = "center")
 										
 									) 
@@ -194,12 +197,12 @@ if __name__ == '__main__':
 					ft.Container(height = 50, content= title_list_history, alignment=ft.alignment.center),
 					ft.Divider(height=1, color="black"),
 					ft.Row(spacing=10, controls=[
-							Text('N°', width=20, text_align="center"),
-							Text('View', width=80, text_align="center"), 
-							Text('Product Title', width=270, text_align="center"),
-							Text(f'Price', width=95, text_align="center"),
-							Text(f'Platform', width=65, text_align="center"),
-							Text(f'Date', width=100, text_align="center")
+							Text('N°', width=20, text_align="center", color="white"),
+							Text('View', width=80, text_align="center", color="white"), 
+							Text('Product Title', width=270, text_align="center", color="white"),
+							Text(f'Price', width=95, text_align="center", color="white"),
+							Text(f'Platform', width=65, text_align="center",color="white"),
+							Text(f'Date', width=100, text_align="center", color="white")
 							],
 							alignment="center", vertical_alignment = "center"),
 					ft.Divider(height=1, color="black"),

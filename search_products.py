@@ -69,7 +69,7 @@ while status_search:
 
 				req = requests.get(url, headers=headers, timeout=10)
 
-				soup = BeautifulSoup(req.text, "html5lib")
+				soup = BeautifulSoup(req.text, "html.parser")
 											
 				product_title = soup.find('span',  id="productTitle").text.strip()
 
@@ -80,7 +80,7 @@ while status_search:
 				for k in range(0, 5):
 					try:
 						req = requests.get(url, headers=headers, timeout=10)
-						soup = BeautifulSoup(req.text, "html5lib")
+						soup = BeautifulSoup(req.text, "html.parser")
 						product_stock = soup.find_all('span', class_="a-size-medium a-color-price")
 						if len(product_stock) != 0:
 							for n in product_stock:
