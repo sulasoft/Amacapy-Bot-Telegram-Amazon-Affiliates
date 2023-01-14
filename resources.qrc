@@ -1,0 +1,10 @@
+<RCC>
+  <qresource prefix="Buttons">
+    <file>img/amacapy-ajustes.png</file>
+    <file>img/amacapy-boton-atras.png</file>
+    <file>img/amacapy-boton-eliminar.png</file>
+    <file>img/amacapy-boton-ver.png</file>
+    <file>img/amacapy-lista-productos.png</file>
+    <file>img/amacapy-resultado-busqueda.png</file>
+  </qresource>
+</RCC>
