@@ -8,19 +8,19 @@ from io import open
 import webbrowser
 import pandas as pd
 from pandas import ExcelWriter
-import threading
 from datetime import datetime
-from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from multiprocessing import Process
-
+import search_products
+import publish
 
 
 # Starting the scripts that will search for products on Amazon and post on Telegram.
 def script_search_products():
-	exec(open("search_products.py").read())
+	search_products.enable(True)
 
 def script_publish():
-	exec(open("publish.py").read())
+	publish.enable(True)
+
 
 
 if __name__ == '__main__':
@@ -487,7 +487,7 @@ if __name__ == '__main__':
 				list_publish_data['title']    = new_title_publish
 				list_publish_data['price']    = new_price_publish
 				list_publish_data['currency'] = new_currency_publish
-				list_publish_data['url']      = new_currency_publish
+				list_publish_data['url']      = new_url_publish
 
 				list_publish_data = pd.DataFrame(list_publish_data, columns = ['title', 'price', 'currency', 'url'])
 
@@ -810,7 +810,7 @@ if __name__ == '__main__':
 							new_price_result.append(price_result[count])
 							new_currency_result.append(currency_result[count])
 							new_check_result.append(check_result[count])
-							new_url_result.append(check_result[count])
+							new_url_result.append(url_result[count])
 						# On the other hand, if they have the value "yes", they will be stored in the variables 
 						# that will be used to store the information in the list_publish.xlsx document.
 						else:
@@ -1072,6 +1072,7 @@ if __name__ == '__main__':
 
 			def stop_search_product(e):
 				processes_search_product[0].kill()
+				
 				processes_search_product.pop(0)
 				# To read the data contained in the file that stores the products to be searched.
 				verify_search_product  = pd.read_excel('data/search_product.xlsx', header = 0) 
@@ -1117,6 +1118,29 @@ if __name__ == '__main__':
 
 				search_product_data = pd.DataFrame(search_product_data, columns = ['title', 'region', 'pub', 'quick'])
 
+				verify_status_support = pd.read_excel('data/support_dev.xlsx', header = 0)
+				sup_tag 			  = verify_status_support['sup_tag'].values
+				sup_dev               = verify_status_support['sup_dev'].values
+
+				support_data = {}
+
+				if 'com' in region:
+					sup_tag = 'amla02-20'
+				else:
+					sup_tag = 'amla07-21'
+
+				support_data['sup_tag'] = [sup_tag]
+				support_data['sup_dev'] = sup_dev
+
+				update_status_support = pd.DataFrame(support_data, columns = ['sup_tag', 'sup_dev'])
+				try:
+					with ExcelWriter('data/support_dev.xlsx') as writer:
+						update_status_support.to_excel(writer, 'Sheet', index=False)
+				except:
+					sleep(1)
+					with ExcelWriter('data/support_dev.xlsx') as writer:
+						update_status_support.to_excel(writer, 'Sheet', index=False)
+
 				try:
 					with ExcelWriter('data/search_product.xlsx') as writer:
 						search_product_data.to_excel(writer, 'Sheet', index=False)
@@ -1140,6 +1164,7 @@ if __name__ == '__main__':
 					pass
 				else:
 					processes_search_product[0].start()
+
 					page.clean()
 					searching_text = Text(
 					value="Searching...",
@@ -1167,7 +1192,7 @@ if __name__ == '__main__':
 
 					
 
-					while len(verify_search_product) !=0 and processes_search_product[0].is_alive():
+					while len(verify_search_product) !=0: # and processes_search_product[0].is_alive():
 						try:
 							verify_search_product  = pd.read_excel('data/search_product.xlsx', header = 0)
 						except:
@@ -1198,6 +1223,7 @@ if __name__ == '__main__':
 						if processes_search_product[0].is_alive():
 							processes_search_product[0].kill()
 							processes_search_product.pop(0)
+						
 						search_form.value = ''
 						page_search_result(1)
 
@@ -1516,7 +1542,7 @@ if __name__ == '__main__':
 			sulasoftcom_button			 = ft.TextButton(text = "sulasoft.com", on_click=urls_support)
 			linkedin_button  			 = ft.TextButton(text = "Linkedin", on_click=urls_support)
 			telegram_channel_button		 = ft.TextButton(text = "Telegram", icon = 'telegram', on_click=urls_support)
-			button_info_supp			 = ft.IconButton(icon="info_rounded", tooltip= "The third product you share will have the developer's tag.")
+			button_info_supp			 = ft.IconButton(icon="info_rounded", tooltip= "1 out of 6 published products contains the developer's amazon affiliates tag.")
 			
 			# Switch to view or not the products with price 0
 			switch_show_price_0 		 = ft.Switch(on_change=page_search_result, value=True)
