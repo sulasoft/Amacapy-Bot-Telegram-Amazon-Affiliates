@@ -12,6 +12,7 @@ from datetime import datetime
 from multiprocessing import Process
 import search_products
 import publish
+from os import remove
 
 
 # Starting the scripts that will search for products on Amazon and post on Telegram.
@@ -62,8 +63,20 @@ if __name__ == '__main__':
 
 			# This function will display the screen with the list of products that will be ready to be published.
 			def page_publish(self):
-				# We read the file where the product data is stored
-				verify_list_publish  = pd.read_excel('data/list_publish.xlsx', header = 0)
+				try:
+					# We read the file where the product data is stored
+					verify_list_publish  = pd.read_excel('data/list_publish.xlsx', header = 0)
+
+				except:
+					sleep(2)
+					try:
+						# We read the file where the product data is stored
+						verify_list_publish  = pd.read_excel('data/list_publish.xlsx', header = 0)
+					except:
+						remove('data/list_publish.xlsx')
+						update_list_publish_data = pd.DataFrame(columns = ['title', 'price', 'currency', 'url'])
+						with ExcelWriter('data/list_publish.xlsx') as writer:
+							update_list_publish_data.to_excel(writer, 'Sheet', index=False)
 
 				title_list_publish 	      = verify_list_publish['title'].values
 				price_list_publish 	      = verify_list_publish['price'].values

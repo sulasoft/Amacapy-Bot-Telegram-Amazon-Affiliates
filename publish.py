@@ -21,6 +21,7 @@ def enable(e):
 		# To know if URL shorteners will be used or not.
 		verify_short_url  = pd.read_excel('data/short_url.xlsx', header = 0)
 		url_short = verify_short_url['short_url'].values
+		sleep(1)
 
 		# To verify program development support data.
 		verify_support_dev  = pd.read_excel('data/support_dev.xlsx', header = 0)
@@ -148,14 +149,20 @@ def enable(e):
 								with ExcelWriter('data/publish_on.xlsx') as writer:
 									update_publish_data.to_excel(writer, 'Sheet', index=False)
 							except:
-								sleep(3)
-								# To remove the published product from the list of requests.
-								verify_publish  = pd.read_excel('data/publish_on.xlsx', header = 0)
-								verify_publish = verify_publish.drop(0)
-								update_publish_data = pd.DataFrame(verify_publish, columns = ['title', 'price', 'url', 'min', 'telegram'])
-							
-								with ExcelWriter('data/publish_on.xlsx') as writer:
-									update_publish_data.to_excel(writer, 'Sheet', index=False)
+								try:
+									sleep(3)
+									# To remove the published product from the list of requests.
+									verify_publish  = pd.read_excel('data/publish_on.xlsx', header = 0)
+									verify_publish = verify_publish.drop(0)
+									update_publish_data = pd.DataFrame(verify_publish, columns = ['title', 'price', 'url', 'min', 'telegram'])
+								
+									with ExcelWriter('data/publish_on.xlsx') as writer:
+										update_publish_data.to_excel(writer, 'Sheet', index=False)
+								except:
+									update_publish_data = pd.DataFrame(columns = ['title', 'price', 'url', 'min', 'telegram'])
+								
+									with ExcelWriter('data/publish_on.xlsx') as writer:
+										update_publish_data.to_excel(writer, 'Sheet', index=False)
 
 							# To remove the published product from the list of products to be published.
 							try:
@@ -166,13 +173,18 @@ def enable(e):
 								with ExcelWriter('data/list_publish.xlsx') as writer:
 									update_list_publish_data.to_excel(writer, 'Sheet', index=False)
 							except:
-								sleep(3)
-								verify_list_publish  = pd.read_excel('data/list_publish.xlsx', header = 0)
-								verify_list_publish = verify_list_publish.drop(0)
-								update_list_publish_data = pd.DataFrame(verify_list_publish, columns = ['title', 'price', 'currency', 'url'])
-							
-								with ExcelWriter('data/list_publish.xlsx') as writer:
-									update_list_publish_data.to_excel(writer, 'Sheet', index=False)
+								try:
+									sleep(3)
+									verify_list_publish  = pd.read_excel('data/list_publish.xlsx', header = 0)
+									verify_list_publish = verify_list_publish.drop(0)
+									update_list_publish_data = pd.DataFrame(verify_list_publish, columns = ['title', 'price', 'currency', 'url'])
+								
+									with ExcelWriter('data/list_publish.xlsx') as writer:
+										update_list_publish_data.to_excel(writer, 'Sheet', index=False)
+								except:
+									update_list_publish_data = pd.DataFrame(columns = ['title', 'price', 'currency', 'url'])
+									with ExcelWriter('data/list_publish.xlsx') as writer:
+										update_list_publish_data.to_excel(writer, 'Sheet', index=False)
 
 							# To add the published product to the history.
 							try:
@@ -186,16 +198,23 @@ def enable(e):
 								with ExcelWriter('data/history.xlsx') as writer:
 									update_history_data.to_excel(writer, 'Sheet', index=False)
 							except:
-								sleep(3)
-								verify_history   = pd.read_excel('data/history.xlsx', header = 0)
-								add_history = {'date': date_publish.today(), 'title': title_publish[i], 'price': price_publish[i], 'url': url_publish[i], 'platform': 'Telegram'}
-								add_history = pd.DataFrame(add_history, index=[0])
+								try:
+									sleep(3)
+									verify_history   = pd.read_excel('data/history.xlsx', header = 0)
+									add_history = {'date': date_publish.today(), 'title': title_publish[i], 'price': price_publish[i], 'url': url_publish[i], 'platform': 'Telegram'}
+									add_history = pd.DataFrame(add_history, index=[0])
 
-								verify_history  = pd.concat([verify_history, add_history], axis=0)
-								update_history_data = pd.DataFrame(verify_history, columns = ['date', 'title', 'price', 'url', 'platform'])
+									verify_history  = pd.concat([verify_history, add_history], axis=0)
+									update_history_data = pd.DataFrame(verify_history, columns = ['date', 'title', 'price', 'url', 'platform'])
 							
-								with ExcelWriter('data/history.xlsx') as writer:
-									update_history_data.to_excel(writer, 'Sheet', index=False)
+									with ExcelWriter('data/history.xlsx') as writer:
+										update_history_data.to_excel(writer, 'Sheet', index=False)
+
+								except:
+									update_history_data = pd.DataFrame(columns = ['date', 'title', 'price', 'url', 'platform'])
+							
+									with ExcelWriter('data/history.xlsx') as writer:
+										update_history_data.to_excel(writer, 'Sheet', index=False)
 
 							sleep(float(min_publish[i])*60)
 
