@@ -164,6 +164,39 @@ def enable(e):
 									with ExcelWriter('data/publish_on.xlsx') as writer:
 										update_publish_data.to_excel(writer, 'Sheet', index=False)
 
+									# To check the list of products to be published
+									verify_list_publish = pd.read_excel('data/list_publish.xlsx', header = 0)
+									title_publish 		= verify_list_publish['title'].values
+									price_publish       = verify_list_publish['price'].values
+									url_publish 		= verify_list_publish['url'].values
+
+									# They will be used to save the data stored in list_publish.xlsx and add them to publish_on.xlsx 
+									# (this file stores the products that will be published).
+									title_publish_on    = []
+									price_publish_on    = []
+									url_publish_on	    = []
+									minutes_publish_on  = []
+									telegram_publish_on = []
+
+									for i in range(len(verify_list_publish)):
+										title_publish_on.append(title_publish[i])
+										price_publish_on.append(price_publish[i])
+										url_publish_on.append(url_publish[i])
+										minutes_publish_on.append(min_publish[i])
+										telegram_publish_on.append('yes')
+
+
+									add_history = {'title': title_publish_on, 'price': price_publish_on, 'url': url_publish_on, 'min': minutes_publish_on,'telegram':telegram_publish_on}
+
+									update_publish_on = pd.DataFrame(add_history, columns = ['title', 'price', 'url', 'min', 'telegram'])
+									
+									with ExcelWriter('data/publish_on.xlsx') as writer:
+										update_publish_on.to_excel(writer, 'Sheet', index=False)
+
+									# To remove the published product from the list of requests.
+									verify_publish  = pd.read_excel('data/publish_on.xlsx', header = 0)
+									verify_publish = verify_publish.drop(0)
+
 							# To remove the published product from the list of products to be published.
 							try:
 								verify_list_publish  = pd.read_excel('data/list_publish.xlsx', header = 0)

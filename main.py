@@ -862,6 +862,43 @@ if __name__ == '__main__':
 				else:
 					pass
 
+			# Function to delete the products added in the search result.
+			def select_all_search_result(e):
+				# The data stored in the searched products is checked.
+				verify_search_result  = pd.read_excel('data/search_result.xlsx', header = 0)
+
+				# To be stored in the following variables:
+				title_result 	      = verify_search_result['title'].values
+				price_result 	      = verify_search_result['price'].values
+				currency_result   	  = verify_search_result['currency'].values
+				check_result       	  = verify_search_result['check'].values
+				url_result       	  = verify_search_result['url'].values
+
+				status_select = e.control.text
+
+				# For all products to be selected, "yes" must be placed in the "check" column.
+				new_check_values = []
+				for i in range(len(verify_search_result)):
+					if 'Unselect' in status_select:
+						new_check_values.append('no')
+					else:
+						new_check_values.append('yes')
+
+				update_data = {}
+				update_data['title'] 	= title_result
+				update_data['price'] 	= price_result
+				update_data['currency'] = currency_result
+				update_data['check'] 	= new_check_values
+				update_data['url']		= url_result
+
+				search_result_data = pd.DataFrame(update_data, columns = ['title', 'price', 'currency', 'check', 'url'])
+
+				with ExcelWriter('data/search_result.xlsx') as writer:
+					search_result_data.to_excel(writer, 'Sheet', index=False)
+				sleep(1)
+				page_search_result(1)
+
+
 			# Function to delete the products added in the history.
 			def delete_all_history(self):
 				history_data = pd.DataFrame(columns = ['date', 'title', 'price', 'url', 'platform'])
@@ -985,6 +1022,11 @@ if __name__ == '__main__':
 
 				show_price_0 = switch_show_price_0.value
 
+				if 'no' in check_result:
+					select_products = ft.ElevatedButton(text = "Select All", icon="check_box_outlined", on_click=select_all_search_result)
+				else:
+					select_products = ft.ElevatedButton(text = "Unselect All", icon="check_box_outline_blank_rounded", on_click=select_all_search_result)
+
 				check = []
 
 				if show_price_0:
@@ -1073,7 +1115,8 @@ if __name__ == '__main__':
 					ft.Container(height= 358, content=all_results),
 					ft.Row(controls=[
 							ft.ElevatedButton("Add to Publish", icon="add_circle_outline_rounded", on_click=add_to_publish),
-							ft.ElevatedButton("Delete All", icon="delete_rounded", on_click=delete_all_search_result)
+							ft.ElevatedButton("Delete All", icon="delete_rounded", on_click=delete_all_search_result),
+							select_products
 							],
 							alignment="center", vertical_alignment = "start"),
 					ft.Row(controls=[switch_show_price_0], alignment="center", vertical_alignment = "start"),					
@@ -1509,9 +1552,11 @@ if __name__ == '__main__':
 			switch_quick_search		    = ft.Switch(label = 'Quick search', value=True)
 			search_form   				= TextField(label="Search...", width=400, height = 50, on_submit=search_products, text_align="start", keyboard_type = "text", text_size=12, content_padding = 10)
 			select_region 				= ft.RadioGroup(content=ft.Row(alignment="center", controls=[
-											ft.Radio(value=".com", label="Amazon.com"),
-											ft.Radio(value=".es", label="Amazon.es"),
-											ft.Radio(value=".it", label="Amazon.it")]), value = ".com")       
+											ft.Text("Amazon "),
+											ft.Radio(value=".com", label=".com"),
+											ft.Radio(value=".es", label=".es"),
+											ft.Radio(value=".it", label=".it"),
+											ft.Radio(value=".in", label=".in")]), value = ".com")       
 			
 			minutes_publish              = TextField(value='0', label = 'Minutes', text_align="start", keyboard_type = "text", width=70, height = 50, text_size=12, content_padding = 10)
 			press_button_publish_on_stop = ft.ElevatedButton("Stop", icon="stop_circle_rounded", on_click=stop_publish_on)

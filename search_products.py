@@ -56,6 +56,8 @@ def enable(e):
 
 				if region == '.com':
 					currency = 'USD'
+				elif region =='.in':
+					currency = 'Rs'
 				else:
 					currency = 'EUR'
 			
@@ -216,6 +218,8 @@ def enable(e):
 								if len(new_currency_result) == 0:
 									if '.com' in keyword:
 										new_currency_result.append('USD')
+									elif '.in' in keyword:
+										new_currency_result.append('Rs')
 									else:
 										new_currency_result.append('EUR')
 							except Exception as e:
