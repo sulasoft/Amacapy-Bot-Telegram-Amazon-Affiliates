@@ -58,6 +58,8 @@ def enable(e):
 					currency = 'USD'
 				elif region =='.in':
 					currency = 'Rs'
+				if region == '.com.br':
+					currency = 'BRL'
 				else:
 					currency = 'EUR'
 			
@@ -206,6 +208,9 @@ def enable(e):
 								elif 'US$' in product_price:
 									new_currency_result.append('USD')
 									product_price = product_price.replace('US$', '')
+								elif 'R$' in product_price:
+									new_currency_result.append('BRL')
+									product_price = product_price.replace('R$', '')
 								elif '$' in product_price:
 									new_currency_result.append('USD')
 									product_price = product_price.replace('$', '')
@@ -220,6 +225,8 @@ def enable(e):
 										new_currency_result.append('USD')
 									elif '.in' in keyword:
 										new_currency_result.append('Rs')
+									elif '.com.br' in keyword:
+										new_currency_result('BRL')
 									else:
 										new_currency_result.append('EUR')
 							except Exception as e:
