@@ -1,7 +1,7 @@
 <h1 align="center"> Amacapy </h1>
 <p>Amacapy is a program that focuses on web scraping amazon.com, amazon.es and amazon.it. The data extracted are the price, title and URL of the products searched, then with the help of a Telegram bot created with Bot Father, these are published in a certain time.</p>
 
-<h2 align="center"> <a target=”_blank” href='[https://sulasoft.com/telegram-bot-for-amazon-affiliates/](https://play.google.com/store/apps/details?id=com.sulasoft.amacapy)'>Download the new version here.</a> </h2>
+<h2 align="center"> <a target=”_blank” href='https://sulasoft.com/telegram-bot-for-amazon-affiliates/'>Download the new version here.</a> </h2>
 
 
 
