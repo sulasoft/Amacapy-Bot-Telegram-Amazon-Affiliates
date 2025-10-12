@@ -1554,6 +1554,7 @@ if __name__ == '__main__':
 			select_region 				= ft.RadioGroup(content=ft.Row(alignment="center", controls=[
 											ft.Text("Amazon "),
 											ft.Radio(value=".com", label=".com"),
+											ft.Radio(value=".com.br", label=".com.br"),
 											ft.Radio(value=".es", label=".es"),
 											ft.Radio(value=".it", label=".it"),
 											ft.Radio(value=".in", label=".in")]), value = ".com")       
